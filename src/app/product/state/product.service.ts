@@ -4,30 +4,21 @@ import { ID } from '@datorama/akita';
 import { tap } from 'rxjs/operators';
 import { IProduct } from './product.model';
 import { ProductStore } from './product.store';
+import {of, timer} from 'rxjs/index';
+import {mapTo, timeout} from 'rxjs/internal/operators';
+import {products} from '../../mock-data/products.data';
 
 @Injectable({ providedIn: 'root' })
 export class ProductService {
 
-  constructor(private productStore: ProductStore, private http: HttpClient) {
+  constructor(private productStore: ProductStore) {
   }
 
-
+  // get all products from data file (mock api call)
   get() {
-    return this.http.get<IProduct[]>('https://api.com').pipe(tap(entities => {
-      this.productStore.set(entities);
-    }));
+    timer(1500).pipe(mapTo(products))
+      .subscribe( products =>{
+        this.productStore.set(products);
+      });
   }
-
-  add(product: IProduct) {
-    this.productStore.add(product);
-  }
-
-  update(id, product: Partial<IProduct>) {
-    this.productStore.update(id, product);
-  }
-
-  remove(id: ID) {
-    this.productStore.remove(id);
-  }
-
 }
