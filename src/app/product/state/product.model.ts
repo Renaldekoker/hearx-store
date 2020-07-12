@@ -7,6 +7,10 @@ export interface IProduct {
   price: number | null;
 }
 
+export interface IProductUI {
+  isLoading: boolean;
+}
+
 export function createProduct(params: Partial<IProduct>) {
   return {
 

@@ -1,5 +1,5 @@
+<mat-progress-bar *ngIf="isLoading$ | async" mode="indeterminate"></mat-progress-bar>
 <mat-card class="product-card">
-
   <mat-card-header>
     <img mat-card-avatar [src]="product.image" alt="product image">
     <mat-card-title></mat-card-title>
@@ -9,7 +9,19 @@
   <h2>R {{ product.price }}</h2>
 
   <mat-card-actions>
-    <button mat-button>Add to cart</button>
+    <button mat-button *ngIf="!(cartItem$ | async)" (click)="addProductToCart()">
+      <span *ngIf="!(isLoading$ | async)">Add to cart</span>
+      <span *ngIf="(isLoading$ | async)">Loading...</span>
+    </button>
+    <div *ngIf="(cartItem$ | async)">
+      <button [disabled]="(isLoading$ | async)" mat-mini-fab aria-label="Increment product quantity" (click)="addProductToCart()">
+        <mat-icon>add</mat-icon>
+      </button>
+      <span class="qty-text" *ngIf="!(isLoading$ | async)">{{ (cartItem$ | async)?.quantity }}</span>
+      <span *ngIf="(isLoading$ | async)">Loading...</span>
+      <button [disabled]="(isLoading$ | async)" mat-mini-fab aria-label="Decrement product quantity" (click)="removeProductFromCart()">
+        <mat-icon>remove</mat-icon>
+      </button>
+    </div>
   </mat-card-actions>
-
 </mat-card>

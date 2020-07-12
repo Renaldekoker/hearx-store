@@ -19,10 +19,10 @@ export class LandingPageComponent implements OnInit {
     private productQuery: ProductQuery,
     private productService: ProductService
   ) {
-    this.getProducts();
   }
 
   ngOnInit(): void {
+    this.getProducts();
   }
 
   getProducts() {

@@ -18,7 +18,7 @@ export const products = [{
 }, {
   id: 4,
   image: 'https://picsum.photos/200',
-  name: 'Sony WF-1000XM3 True Witeless Noise Canceling',
+  name: 'Sony WF-1000XM3 True Wireless Noise Canceling',
   price: 5499
 }, {
   id: 5,

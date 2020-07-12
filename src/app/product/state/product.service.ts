@@ -4,7 +4,7 @@ import { ID } from '@datorama/akita';
 import { tap } from 'rxjs/operators';
 import { IProduct } from './product.model';
 import { ProductStore } from './product.store';
-import {of, timer} from 'rxjs/index';
+import {Observable, of, timer} from 'rxjs/index';
 import {mapTo, timeout} from 'rxjs/internal/operators';
 import {products} from '../../mock-data/products.data';
 
@@ -17,7 +17,7 @@ export class ProductService {
   // get all products from data file (mock api call)
   get() {
     timer(1500).pipe(mapTo(products))
-      .subscribe( products =>{
+      .subscribe( products => {
         this.productStore.set(products);
       });
   }
