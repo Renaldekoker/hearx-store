@@ -1,5 +1,29 @@
-<div class="container">
+<div class="container loader-container">
+  <mat-progress-bar *ngIf="(isLoading$ | async)" mode="indeterminate"></mat-progress-bar>
+</div>
+<div class="container products-container">
   <h1>Products</h1>
+  <br>
+  <div class="row">
+    <div class="col-6">
+      <mat-form-field appearance="fill">
+        <mat-label>Sort by</mat-label>
+        <mat-select [formControl]="sortBy" (selectionChange)="sort()">
+          <mat-option value="name">Name</mat-option>
+          <mat-option value="price">Price</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-6">
+      <mat-form-field appearance="fill">
+        <mat-label>Sort Order</mat-label>
+        <mat-select [formControl]="sortOrder" (selectionChange)="sort()">
+          <mat-option value="asc">Ascending</mat-option>
+          <mat-option value="desc">Descending</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
   <div class="row">
     <div class="col-sm-6 col-lg-3" *ngFor="let product of products$ | async">
       <app-product [productId]="product.id"></app-product>
