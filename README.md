@@ -4,7 +4,7 @@ Assessment of candidate:
 
 Renaldo van Dyk
 
-##demo
+## demo
 
 For your convenience I have hosted the dockerized application on the following link:
 
